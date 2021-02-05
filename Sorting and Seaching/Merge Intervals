@@ -1,0 +1,40 @@
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& v) {
+        
+        for(int i=0; i<v.size(); i++){
+			int m = *max_element(v[i].begin(),v[i].end());
+            int l = *min_element(v[i].begin(),v[i].end());
+			for(int j=0; j<v.size(); j++){
+			   if(v[j].empty() || i==j){
+				   continue;
+			   }
+               int n = *min_element(v[j].begin(),v[j].end());
+               int p = *max_element(v[j].begin(),v[j].end());
+               if((m>=n && m<=p) || (l>=n && l<=p)){
+				   v[j].clear();
+                   v[i].clear();
+                   int a[4]={l,n,m,p};
+                   sort(a,a+4);
+                   m=a[3],l=a[0];
+                   v[i].push_back(a[0]);
+                   v[i].push_back(a[3]);
+			   }
+		   }
+	   }
+        
+       vector<vector<int>> ans;
+       
+       for(int i=0,j=0; i<v.size(); i++){
+           
+          	  if(v[i].empty()){
+				   continue;
+              }
+           
+          ans.push_back(v[i]);
+       }
+        
+       return ans;
+        
+    }
+};
