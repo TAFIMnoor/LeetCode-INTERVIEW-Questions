@@ -1,0 +1,29 @@
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        
+        unordered_set<int> s;
+        unordered_map<long long,int> m;
+        vector<int> g[nums.size()];
+        
+        int cnt=0;
+        
+        for(int i=0; i<nums.size(); i++){
+            g[m[nums[i]]++].push_back(nums[i]);
+            cnt=max(cnt,m[nums[i]]);
+        }
+        for(int i=cnt-1; i>=0; i--){
+            for(int j=0; j<g[i].size(); j++){
+                if(s.size()<k){
+                    s.insert(g[i][j]);
+                }
+                else break;
+            }
+           // g[i].clear();
+        }
+        vector<int> ans (s.begin(),s.end());
+      //  s.clear();
+      //  m.clear();
+        return ans;
+    }
+};
